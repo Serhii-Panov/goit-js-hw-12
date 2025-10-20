@@ -1,0 +1,123 @@
+/**
+  |============================
+  | include css partials with
+  | default @import url()
+  |============================
+*/
+/* Common styles */
+@import url('./reset.css');
+@import url('./base.css');
+@import url('./container.css');
+
+/* Sections style */
+input {
+  border: 1px solid #808080;
+  border-radius: 4px;
+  width: 272px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #808080;
+  padding: 8px 16px;
+}
+button {
+  cursor: pointer;
+  border: transparent;
+  border-radius: 4px;
+  background-color: #4e75ff;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  padding: 8px 16px;
+}
+button:hover {
+  background-color: #6c8cff;
+}
+.loader-wrapper {
+  padding: 10px 0;
+}
+.loader {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  position: relative;
+  border: 2px solid #000000;
+  box-sizing: border-box;
+  animation: rotation 2s linear infinite;
+  display: none;
+}
+.loader::after,
+.loader::before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 2px solid #ff3d00;
+  width: 38px;
+  height: 38px;
+  animation: rotationBack 1.5s linear infinite;
+  transform-origin: center center;
+}
+.loader::before {
+  width: 28px;
+  height: 28px;
+  border-color: #000000;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.gallery {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, 360px);
+  align-items: center;
+  justify-items: center;
+}
+img {
+  width: 360px;
+  height: 200px;
+  transition: transform 250ms ease-in;
+}
+img:hover {
+  transform: scale(1.05);
+}
+.gallery-container {
+  overflow-x: hidden;
+  height: 80vh;
+  display: grid;
+  place-items: center;
+}
+.stats {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #808080;
+}
