@@ -36,8 +36,13 @@ button {
 button:hover {
   background-color: #6c8cff;
 }
+.load-more {
+  display: none;
+  /* center the button horizontally when shown */
+  margin: 16px auto;
+}
 .loader-wrapper {
-  padding: 10px 0;
+  padding: 80px 0;
 }
 .loader {
   width: 48px;
@@ -93,23 +98,44 @@ button:hover {
 .gallery {
   display: grid;
   gap: 24px;
-  grid-template-columns: repeat(3, 360px);
-  align-items: center;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: start;
   justify-items: center;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 1200px;
 }
-img {
-  width: 360px;
+
+@media (min-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.gallery img {
+  width: 100%;
+  max-width: 360px;
   height: 200px;
+  object-fit: cover;
   transition: transform 250ms ease-in;
 }
-img:hover {
+.gallery img:hover {
   transform: scale(1.05);
 }
 .gallery-container {
   overflow-x: hidden;
-  height: 80vh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 .stats {
   display: flex;
