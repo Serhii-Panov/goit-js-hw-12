@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const API_KEY = '52790584-b8940124ef420833efbac5129';
 export async function getImagesByQuery(query, page) {
-  return  await axios
-    .get('https://pixabay.com/api/', {
+  try {
+    const response = await axios.get('https://pixabay.com/api/', {
       params: {
         q: query,
         key: API_KEY,
@@ -13,10 +13,9 @@ export async function getImagesByQuery(query, page) {
         per_page: 15,
         page: page,
       },
-    })
-    .then(response => response.data)
-    .catch(err => {
-      console.error('Error in getImagesByQuery:', err);
-      throw err;
     });
+    return response.data;
+  } catch (error) {
+    throw err;
+  }
 }

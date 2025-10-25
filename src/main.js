@@ -54,8 +54,8 @@ form.addEventListener('submit', onSearch);
 function onSearch(event) {
   event.preventDefault();
   const formData = new FormData(form);
-  const query = formData.get('search-text').trim();
-  if (query === '') {
+  currentQuery = formData.get('search-text').trim();
+  if (currentQuery === '') {
     iziToast.error({
       title: 'Error',
       message: 'Please enter a search query.',
@@ -65,7 +65,9 @@ function onSearch(event) {
   }
   page = 1;
   showLoader();
-  getImagesByQuery(query, page)
+  clearGallery();
+
+  getImagesByQuery(currentQuery, page)
     .then(data => {
       if (!data || !Array.isArray(data.hits) || data.hits.length === 0) {
         iziToast.error({
@@ -77,13 +79,11 @@ function onSearch(event) {
         clearGallery();
         return;
       }
-      if (query !== currentQuery) {
-        clearGallery();
-        currentQuery = query;
-      }
       createGallery(data.hits);
       page += 1;
-      showLoadMoreButton();
+      if (page < Math.ceil(data.totalHits / 15)) {
+        showLoadMoreButton();
+      }
     })
     .catch(error => {
       iziToast.error({
